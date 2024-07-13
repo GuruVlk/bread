@@ -3,7 +3,7 @@ import streamlit as st
 # Step 1: Define translations
 translations = {
     'English': {
-        'title': 'The Bread 🍞',
+        'title': 'Sauerdough Bread 🍞',
         'bread_flour': 'Bread Flour',
         'hydratation': 'Hydration (%)',
         'ingredients': 'Ingredients',
@@ -37,7 +37,7 @@ Every starter is different, you may need to adjust the amount of starter based o
 """
     },
     'Czech': {
-        'title': 'Chléb 🍞',
+        'title': 'Kváskový Chléb 🍞',
         'bread_flour': 'Chlebová mouka',
         'hydratation': 'Hydratace (%)',
         'ingredients': 'Ingredience',
@@ -73,7 +73,14 @@ Každý kvásek je jiný, možná bude potřeba upravit množství kvásku podle
 }
 
 # Step 2: Language selection
-language = st.selectbox('Choose your language', options=['English', 'Czech'])
+# language = st.selectbox('Choose your language', options=['English', 'Czech'])
+
+language_opt = st.toggle('Czech', False)
+if language_opt:
+    language = 'Czech'
+else:
+    language = 'English'
+
 
 # Use the selected language for labels
 labels = translations[language]
@@ -82,13 +89,22 @@ labels = translations[language]
 st.title(labels['title'])
 
 bread_flour = st.number_input(labels['bread_flour'], value=500, step=50)
-hydratation = st.number_input(labels['hydratation'], value=75, step=5)
+hydratation = st.slider('Hydratation' , 60, 100, 70, 5, )
+
+if hydratation >= 80:
+    st.warning('80% - 100% High hydration dough is sticky and hard to handle - cibatta bread is made with this dough')
+elif hydratation >=70:
+    st.success('70% - 80% is the best range for hydration and fluffy bread')
+elif hydratation >=60:
+    st.info('60% - 70% Medium hydration dough is easy to handle - not so fluffy bread')
 
 water = bread_flour * hydratation / 100
 salt = bread_flour * 0.02
 starter = bread_flour * 0.15
 
 overall_weight = bread_flour + water + salt + starter
+
+
 
 st.header(labels['ingredients'])
 
@@ -99,9 +115,12 @@ st.write(f"""
 - **{salt:.0f}g** {labels['salt']}
 """)
 
-st.write(labels['bread_weight'].format(overall_weight))
+st.subheader(labels['bread_weight'].format(overall_weight))
+
+st.divider()
 
 st.header(labels['instructions'])
 
 st.write(labels['instructions_description'])
  
+
