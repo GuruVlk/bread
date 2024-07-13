@@ -8,7 +8,10 @@ translations = {
         'hydratation': 'Hydration (%)',
         'ingredients': 'Ingredients',
         'instructions': 'Instructions',
-        'bread_weight': 'Bread Weight: {} g'
+        'bread_weight': 'Bread Weight: {} g',
+        "salt": "Salt",
+        "starter": "Sauerdough Starter",
+        "water": "Water"
     },
     'Czech': {
         'title': 'Chléb 🍞',
@@ -16,7 +19,11 @@ translations = {
         'hydratation': 'Hydratace (%)',
         'ingredients': 'Ingredience',
         'instructions': 'Instrukce',
-        'bread_weight': 'Váha chleba: {} g'
+        'bread_weight': 'Váha chleba: {} g',
+        "salt": "Sůl",
+        "starter": "Kvásek",
+        "water": "Voda"
+        
     }
 }
 
@@ -39,18 +46,39 @@ starter = bread_flour * 0.15
 overall_weight = bread_flour + water + salt + starter
 
 st.header(labels['ingredients'])
+
 st.write(f"""
- - **{bread_flour:.0f}g** bread flour
- - **{water:.0f}g** water
- - **{starter:.0f}g** sourdough starter
- - **{salt:.0f}g** salt""")
-
-
-
+- **{bread_flour:.0f}g** {labels['bread_flour']}
+- **{water:.0f}g** {labels['water']}
+- **{starter:.0f}g** {labels['starter']}
+- **{salt:.0f}g** {labels['salt']}
+""")
 
 st.write(labels['bread_weight'].format(overall_weight))
 
 st.header(labels['instructions'])
 
-st.write("Mix all the ingredients together and let the dough rest for 12 hours. ")
+st.write("""
+         Plase noote that every oven baked differently. You may need to adjust the temperature and time based on your oven.
+         Every flour is different, you may need to adjust the hydration based on the flour you are using.
+         Every starter is different, you may need to adjust the amount of starter based on the starter you are using.
+
+         - Mix all the ingredients together and wait for 30 minutes
+         - First **Coil Fold** Method
+            - Fold and wait for 30 minutes
+            - Fold and wait for 30 minutes
+            - Fold and wait for 30 minutes
+         - Then **Strech and fold** Method
+            - Fold and wait for 45 minutes
+            - Fold and wait for 45 minutes
+            - Fold and wait for 45 minutes
+            - Based on the srength of the dough, you can repeat the **Strech and fold** Method
+         - Pre-shape the dough and put it to basket
+            - Wait for 1 hour
+         - Put the dough to the fridge for 12-18 hours (overnight)
+         - Prehat the oven to 245°C
+         - Bake the bread for 20 minutes with the lid on
+         - Bake the bread for 20 minutes with the lid off
+
+         """)
  
