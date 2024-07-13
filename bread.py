@@ -12,6 +12,9 @@ translations = {
         "salt": "Salt",
         "starter": "Sauerdough Starter",
         "water": "Water",
+        "Hydratation60": "60% - 70% Medium hydration dough is easy to handle - not so fluffy bread",
+        "Hydratation70": "70% - 80% is the best range for hydration and fluffy bread",
+        "Hydratation80": "80% - 100% High hydration dough is sticky and hard to handle - cibatta bread is made with this dough",
         'instructions_description': """
 Plase note that every oven bakes differently. You may need to adjust the temperature and time based on your oven.
 Every flour is different, you may need to adjust the hydration based on the flour you are using.
@@ -45,6 +48,9 @@ Every starter is different, you may need to adjust the amount of starter based o
         'bread_weight': 'Váha chleba: {} g',
         "salt": "Sůl",
         "starter": "Kvásek",
+        "Hydratation60": "60% - 70% Středně hydratované těsto je snadno ovladatelné - ne tak nadýchaný chléb",
+        "Hydratation70": "70% - 80% je nejlepší rozsah pro hydrataci a nadýchaný chléb",
+        "Hydratation80": "80% - 100% Vysoká hydratace těsta je lepkavá a těžko se s ní manipuluje - cibatta chléb je vyroben z tohoto těsta",
         "water": "Voda",
             'instructions_description': """
 **Vezměte prosím na vědomí, že každá trouba peče jinak.** Možná bude potřeba upravit teplotu a čas podle vaší trouby.
@@ -88,15 +94,15 @@ labels = translations[language]
 # App content using translations
 st.title(labels['title'])
 
-bread_flour = st.number_input(labels['bread_flour'], value=500, step=50)
-hydratation = st.slider('Hydratation' , 60, 100, 70, 5, )
+bread_flour = st.number_input(labels['bread_flour'], value=500, step=100)
+hydratation = st.slider(labels["hydratation"] , 60, 100, 70, 5, )
 
 if hydratation >= 80:
-    st.warning('80% - 100% High hydration dough is sticky and hard to handle - cibatta bread is made with this dough')
+    st.warning(labels['Hydratation80'])
 elif hydratation >=70:
-    st.success('70% - 80% is the best range for hydration and fluffy bread')
+    st.success(labels['Hydratation70'])
 elif hydratation >=60:
-    st.info('60% - 70% Medium hydration dough is easy to handle - not so fluffy bread')
+    st.info(labels['Hydratation60'])
 
 water = bread_flour * hydratation / 100
 salt = bread_flour * 0.02
